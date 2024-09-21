@@ -6,7 +6,6 @@ env:
   AZURE_WEBAPP_NAME: 'app-practice-polandcentral-dev-001'
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - master
