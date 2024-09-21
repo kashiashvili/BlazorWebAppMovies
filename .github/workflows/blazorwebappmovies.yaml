@@ -2,6 +2,9 @@
 
 name: Deploy to Azure App Service
 
+env:
+  AZURE_WEBAPP_NAME: 'app-practice-polandcentral-dev-001'
+
 on:
   workflow_dispatch:
   # push:
@@ -23,5 +26,15 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
-    - name: Build with dotnet
+    - name: Build
       run: dotnet build --configuration Release --no-restore
+
+    - name: Publish
+      run: dotnet publish -c Release -o ./publish --no-restore --no-build
+
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.PUBLISH_SECRET }}
+        package: ./publish
