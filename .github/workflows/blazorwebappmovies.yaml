@@ -1,0 +1,27 @@
+# github action to deploy blazor web app to azure app service
+
+name: Deploy Blazor Web App to Azure App Service
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Install dependencies
+      run: dotnet restore ./BlazorWebAppMovies/BlazorWebAppMovies.csproj
+
+    - name: Build with dotnet
+      run: dotnet build ./BlazorWebAppMovies/BlazorWebAppMovies.csproj --configuration Release --no-restore
