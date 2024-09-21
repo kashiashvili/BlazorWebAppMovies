@@ -45,8 +45,8 @@
                 <ValidationMessage For="() => Movie.Rating" class="text-danger" />
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Image:</label>
-                <InputFile id="image" OnChange="@LoadFiles" class="form-control" />
+                <label for="poster" class="form-label">Poster:</label>
+                <InputFile id="poster" OnChange="@LoadFiles" class="form-control" />
                 @if (uploadSuccessful)
                 {
                     <p class="bg-success">Uploaded</p>
